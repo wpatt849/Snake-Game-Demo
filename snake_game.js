@@ -58,7 +58,7 @@ let currentHeadPosition = TOTAL_PIXEL_COUNT / 2
 //---Starting length for snake---
 let snakeLength = 300
 
-//---Moving snake---
+//---Moving snake, wraps to other side of screen if necessary---
 const moveSnake = () => {
     switch(snakeCurrentDirection){
         case LEFT_DIR:
@@ -67,6 +67,45 @@ const moveSnake = () => {
           if(isHeadAtLeft){
             currentHeadPosition = currentHeadPosition + LINE_PIXEL_COUNT
           };
-        break;          
+        break;
+        case RIGHT_DIR:
+            ++currentHeadPosition
+            const isHeadAtRight = currentHeadPosition % LINE_PIXEL_COUNT == 0
+            if(isHeadAtRight){
+                currentHeadPosition = currentHeadPosition - LINE_PIXEL_COUNT
+            }         
+        break;
+        case UP_DIR:
+            currentHeadPosition = currentHeadPosition - LINE_PIXEL_COUNT 
+            const isHeadAtTop = currentHeadPosition < 0
+            if(isHeadAtTop){
+                currentHeadPosition = currentHeadPosition + TOTAL_PIXEL_COUNT
+            }
+        break;
+        case DOWN_DIR:
+            currentHeadPosition = currentHeadPosition + LINE_PIXEL_COUNT
+            const isHeadAtBottom = currentHeadPosition > TOTAL_PIXEL_COUNT - 1
+            if(isHeadAtBottom){
+                currentHeadPosition = currentHeadPosition - TOTAL_PIXEL_COUNT
+            }
+        break;
+        default:
+        break;
     }
+    //---Accessing correct pixel within HTML collection---
+    let nextSnakeHeadPixel = gameBoardPixels[currentHeadPosition]
+    //--- Check if snake head will intersect with own body ---
+    if(nextSnakeHeadPixel.classList.contains("snakeBodyPixel")){
+        clearInterval(moveSnakeInterval)
+        alert(`You have eaten ${totalFoodEaten} and traveled ${totalDistanceTraveled} blocks.`)
+        window.location.reload()
+    }
+
+    //--- If empty pixel, add snake body styling ---
+    nextSnakeHeadPixel.classList.add("snakeBodyPixel")
 }
+
+//Initialize game at start up
+createGameBoardPixels();
+createFood();
+let moveSnakeInterval = setInterval(moveSnake, 100)
