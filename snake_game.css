@@ -20,7 +20,7 @@ body{
     height: 1vw;
     border-radius: 10px;
     float: left;
-    outline: 1px solid red;
+    
 }
 .food{
     background-color: red;
@@ -55,4 +55,46 @@ body{
 /* On-Screen Controller */
 #onScreenController{
     display: none;
+}
+
+
+@media only screen and (max-width: 785px) {
+    #gameContainer{
+        width: 80vw;
+        height: 80vw;
+    }
+    .gameBoardPixel{
+        width: 2vw;
+        height: 2vw;
+    }
+    #scoreContainer{
+        width: 80vw;
+    }
+
+    #onScreenController{
+        width: 80vw;
+        margin: 5vw auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    #onScreenController > div{
+        display: flex;
+        flex-direction: column;
+    }
+    #onScreenController button{
+        background-color: transparent;
+        height: 20vw;
+        width: 20vw;
+        font-size: 10vw;
+        border: none;
+    }
+    #onScreenController button:focus{
+        outline: none;
+    }
+    #onScreenController button:active{
+        background-color: gray;
+    }
+
 }
