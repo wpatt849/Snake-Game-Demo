@@ -31,10 +31,10 @@ const createFood = () => {
 //------Setting up snake behavior-------
 
 //---Directions----
-const LEFT_DIR = 37
-const UP_DIR = 38
-const RIGHT_DIR = 39
-const DOWN_DIR = 40
+const LEFT_DIR = "ArrowLeft"
+const UP_DIR = "ArrowUp"
+const RIGHT_DIR = "ArrowRight"
+const DOWN_DIR = "ArrowDown"
 
 let snakeCurrentDirection = RIGHT_DIR
 
@@ -129,7 +129,7 @@ createFood();
 let moveSnakeInterval = setInterval(moveSnake, 100)
 
 //--- Add event listenter for keyboard inputs ---
-addEventListener("keydown", e=> changeDirection(e.keyCode))
+addEventListener("keydown", e=> changeDirection(e.code))
 
 //--- Add variable for on-screen buttons ---
 const leftButton = document.getElementById('leftButton')
