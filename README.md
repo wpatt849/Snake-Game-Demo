@@ -1,3 +1,3 @@
-# Snake-Game-Demo
+Snake Game
 
-This is a demo app recreating snake game using JavaScript.
+An app recreating snake game using JavaScript
